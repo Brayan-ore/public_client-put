@@ -1,5 +1,6 @@
 package com.bootcamp.public_servicedebit.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,8 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class DebitController {
 
-private DebitService service;
+    @Autowired //ADDED
+    private DebitService service;
 	
 	@GetMapping
     public Flux<Debit> findAll() {
@@ -33,7 +35,7 @@ private DebitService service;
         return service.findById(id);
     }
 
-    @PostMapping
+    @PostMapping("/upload")
     public Mono<Debit> save(@RequestBody Debit debit) {
         return service.save(debit);
     }
